@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckBuilderService", "DeckBuilderService\DeckBuilderService.csproj", "{35EF56F5-054C-4A29-AA7A-25FCF5BE103D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckBuilder.Tests", "DeckBuilder.Tests\DeckBuilder.Tests.csproj", "{C18DD3B1-87A9-470E-A5E0-FC81010A7B03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35EF56F5-054C-4A29-AA7A-25FCF5BE103D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35EF56F5-054C-4A29-AA7A-25FCF5BE103D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35EF56F5-054C-4A29-AA7A-25FCF5BE103D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35EF56F5-054C-4A29-AA7A-25FCF5BE103D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C18DD3B1-87A9-470E-A5E0-FC81010A7B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C18DD3B1-87A9-470E-A5E0-FC81010A7B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C18DD3B1-87A9-470E-A5E0-FC81010A7B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C18DD3B1-87A9-470E-A5E0-FC81010A7B03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
