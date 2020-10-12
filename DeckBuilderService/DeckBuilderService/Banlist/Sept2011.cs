@@ -5,7 +5,7 @@ using DeckBuilderService.Models;
 namespace DeckBuilderService.Banlist
 {
     /// <summary>
-    ///     Handles the banlist 
+    ///     Handles the banlist.
     /// </summary>
     public class Sept2011 : IBanlist
     {
@@ -18,19 +18,43 @@ namespace DeckBuilderService.Banlist
 
         public void BuildBanlist()
         {
-            this.BanList = new List<BanlistCards>()
-            {
-                // Chaos Emperor Dragon
-                new BanlistCards() { Id = 82301904, Restriction = Restrictions.Banned },
+            this.BanList = new List<BanlistCards>() { };
 
-                // Cyber Jar
-                new BanlistCards() { Id = 34124316, Restriction = Restrictions.Banned }
-            };
+            this.PushCardToBanlist(82301904, Restrictions.Banned); // Chaos Emperor Dragon
+            this.PushCardToBanlist(34124316, Restrictions.Banned); // Cyber Jar
+
+            throw new NotImplementedException(
+                "Sept2011.cs - BuildBanlist(): Cards in banlist are incomplete."
+            );
         }
 
+        /// <summary>
+        ///     Checks whether the current card is banned.
+        /// </summary>
         public bool IsRestricted()
         {
-            return false;
+            if (this.BanList == null) { this.BuildBanlist(); }
+
+            throw new NotImplementedException(
+                "Sept2011.cs - IsRestricted(): Look up card to add vs. current deck"
+            );
+        }
+
+        /// <summary>
+        ///     Adds a card into the current banlist.
+        /// </summary>
+        private void PushCardToBanlist(int cardId, Restrictions restrictionStatus)
+        {
+            if (cardId < 1) { return; }
+            if (this.BanList == null) { this.BanList = new List<BanlistCards>(); };
+
+            BanlistCards cardToAdd = new BanlistCards()
+            {
+                Id = cardId,
+                Restriction = restrictionStatus
+            };
+
+            this.BanList.Add(cardToAdd);
         }
     }
 }
