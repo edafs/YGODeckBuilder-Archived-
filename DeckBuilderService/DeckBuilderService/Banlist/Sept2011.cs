@@ -7,6 +7,10 @@ namespace DeckBuilderService.Banlist
     /// <summary>
     ///     Handles the banlist.
     /// </summary>
+    /// <remarks>
+    ///     Effective: Sept 01, 2011 - March 01, 2012
+    ///     Banlist available here: https://yugioh.fandom.com/wiki/September_2011_Lists_(TCG)
+    /// </remarks>
     public class Sept2011 : IBanlist
     {
         public List<BanlistCards> BanList { get; set; }
