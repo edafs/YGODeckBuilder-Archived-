@@ -9,5 +9,10 @@
     <Folder Include="Models\" />
     <Folder Include="Models\Response\" />
     <Folder Include="Banlist\" />
+    <Folder Include="Models\Data\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.5.4.31" />
   </ItemGroup>
 </Project>

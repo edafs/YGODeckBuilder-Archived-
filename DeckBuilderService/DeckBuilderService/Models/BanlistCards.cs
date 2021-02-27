@@ -5,7 +5,7 @@ namespace DeckBuilderService.Models
     public class BanlistCards
     {
         /// <summary>
-        ///     The Id of the card.
+        ///     The YGO DB Id of the card.
         /// </summary>
         public int Id { get; set; }
 
