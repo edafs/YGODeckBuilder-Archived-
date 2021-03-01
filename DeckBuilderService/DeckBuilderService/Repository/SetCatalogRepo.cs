@@ -1,30 +1,25 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using DeckBuilderService.Models.Data;
+
 namespace DeckBuilderService.Repository
 {
     public class SetCatalogRepo
     {
-        public SetCatalogRepo()
+        private readonly DynamoDBContext dynamoContext;
+
+        public SetCatalogRepo(IAmazonDynamoDB dynamoDbClient)
         {
+            this.dynamoContext = new DynamoDBContext(dynamoDbClient);
         }
 
-        public void Create()
+        public async Task<IEnumerable<SetReleases>> GetSetCatalog()
         {
-            throw new NotImplementedException("");
-        }
-
-        public void Read()
-        {
-            throw new NotImplementedException("");
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException("");
-        }
-
-        public void Delete()
-        {
-            throw new NotImplementedException("");
+            return await this.dynamoContext
+                .ScanAsync<SetReleases>(new List<ScanCondition>())
+                .GetRemainingAsync();
         }
     }
 }

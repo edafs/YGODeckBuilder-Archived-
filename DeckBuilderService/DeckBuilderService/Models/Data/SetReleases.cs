@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Amazon.DynamoDBv2.DataModel;
 
 namespace DeckBuilderService.Models.Data
 {
+    [DynamoDBTable("YGO_SetCatalog")]
     public class SetReleases
     {
         /// <summary>
         ///     The key value by DynamoDB.
         /// </summary>
-        public int DynamoKey { get; private set; }
+        [DynamoDBHashKey]
+        public string DynamoKey { get; private set; }
 
         /// <summary>
         ///     This is the Konami Code given to us.
@@ -17,6 +19,10 @@ namespace DeckBuilderService.Models.Data
         /// <summary>
         ///     The Konami release date for a set.
         /// </summary>
-        public DateTime ReleaseDate { get; set; }
+        /// <remarks>
+        ///     Amazon recommends store dates as a string
+        ///     in ISO-8601 format.
+        /// </remarks>
+        public string ReleaseDate { get; set; }
     }
 }

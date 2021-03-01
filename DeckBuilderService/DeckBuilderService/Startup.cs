@@ -1,6 +1,8 @@
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.Extensions.NETCore.Setup;
+using DeckBuilderService.Repository;
+using DeckBuilderService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,12 @@ namespace DeckBuilderService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Set Catalog dependencies.
+            services.AddSingleton<SetCatalogService>();
+            services.AddSingleton<SetCatalogRepo>();
+
+            // AWS Setups
             services.AddAWSService<IAmazonDynamoDB>();
             services.AddDefaultAWSOptions(
                 new AWSOptions
@@ -40,11 +48,8 @@ namespace DeckBuilderService
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
