@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.Extensions.NETCore.Setup;
+using DeckBuilderService.Repository;
+using DeckBuilderService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace DeckBuilderService
 {
@@ -22,13 +20,24 @@ namespace DeckBuilderService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        ///     This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Set Catalog dependencies.
+            services.AddSingleton<SetCatalogService>();
+            services.AddSingleton<SetCatalogRepo>();
+
+            ConfigureAWS(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        //      This method gets called by the runtime.
+        ///     Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -37,15 +46,28 @@ namespace DeckBuilderService
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        /// <summary>
+        ///     Configure AWS stuff.
+        /// </summary>
+        private void ConfigureAWS(IServiceCollection services)
+        {
+            services.AddAWSService<IAmazonDynamoDB>();
+
+            // Use the default AWS Profile installed on machine.
+            services.AddDefaultAWSOptions(
+                new AWSOptions
+                {
+                    Region = RegionEndpoint.GetBySystemName("us-east-2")
+                }
+            );
         }
     }
 }
