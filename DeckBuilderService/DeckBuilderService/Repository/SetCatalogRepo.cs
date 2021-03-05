@@ -39,7 +39,7 @@ namespace DeckBuilderService.Repository
         {
             try
             {
-                using (var context = this.dynamoContext)
+                using (DynamoDBContext context = this.dynamoContext)
                 {
                     return await context
                         .ScanAsync<SetReleases>(new List<ScanCondition>())

@@ -21,12 +21,8 @@ namespace DeckBuilderService.Services
         /// </summary>
         public SetCatalogService(SetCatalogRepo setCatalogRepo)
         {
-            if (setCatalogRepo == null)
-            {
-                throw new ArgumentNullException("The set catalog repo failed to intialized.");
-            }
-
-            this._setCatalogRepo = setCatalogRepo;
+            this._setCatalogRepo = setCatalogRepo
+                ?? throw new ArgumentNullException("The set catalog repo failed to intialized.");
         }
 
         /// <summary>

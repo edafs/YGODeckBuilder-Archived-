@@ -23,12 +23,8 @@ namespace DeckBuilderService.Controllers
         /// </summary>
         public SetCatalogController(SetCatalogService setCatalogService)
         {
-            if (setCatalogService == null)
-            {
-                throw new ArgumentNullException("Catalog Service is null");
-            }
-
-            _setCatalogService = setCatalogService;
+            _setCatalogService = setCatalogService
+                ?? throw new ArgumentNullException("Catalog Service is null");
         }
 
         /// <summary>
