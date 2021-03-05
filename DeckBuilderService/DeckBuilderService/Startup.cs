@@ -20,7 +20,9 @@ namespace DeckBuilderService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        ///     This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -29,17 +31,13 @@ namespace DeckBuilderService
             services.AddSingleton<SetCatalogService>();
             services.AddSingleton<SetCatalogRepo>();
 
-            // AWS Setups
-            services.AddAWSService<IAmazonDynamoDB>();
-            services.AddDefaultAWSOptions(
-                new AWSOptions
-                {
-                    Region = RegionEndpoint.GetBySystemName("us-east-2")
-                }
-            );
+            ConfigureAWS(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        //      This method gets called by the runtime.
+        ///     Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,6 +52,22 @@ namespace DeckBuilderService
             {
                 endpoints.MapControllers();
             });
+        }
+
+        /// <summary>
+        ///     Configure AWS stuff.
+        /// </summary>
+        private void ConfigureAWS(IServiceCollection services)
+        {
+            services.AddAWSService<IAmazonDynamoDB>();
+
+            // Use the default AWS Profile installed on machine.
+            services.AddDefaultAWSOptions(
+                new AWSOptions
+                {
+                    Region = RegionEndpoint.GetBySystemName("us-east-2")
+                }
+            );
         }
     }
 }

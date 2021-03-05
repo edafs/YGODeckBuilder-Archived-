@@ -20,8 +20,7 @@ namespace DeckBuilderService.Models.Data
         ///     The Konami release date for a set.
         /// </summary>
         /// <remarks>
-        ///     Amazon recommends store dates as a string
-        ///     in ISO-8601 format.
+        ///     Amazon recommends store dates as ISO-8601 strings.
         /// </remarks>
         public string ReleaseDate { get; set; }
     }
