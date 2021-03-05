@@ -15,7 +15,7 @@ namespace DeckBuilderService.Repository
     public class SetCatalogRepo
     {
         /// <summary>
-        ///     The DynamoDB context by Amazon
+        ///     The DynamoDB context by Amazon.
         /// </summary>
         private readonly DynamoDBContext dynamoContext;
 
