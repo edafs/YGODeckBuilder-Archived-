@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DeckBuilderService.Models.Data;
@@ -24,7 +23,7 @@ namespace DeckBuilderService.Services
         {
             if (setCatalogRepo == null)
             {
-                throw new ApplicationException("The set catalog repo failed to intialized.");
+                throw new ArgumentNullException("The set catalog repo failed to intialized.");
             }
 
             this._setCatalogRepo = setCatalogRepo;
