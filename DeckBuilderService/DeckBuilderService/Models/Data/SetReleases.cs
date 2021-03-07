@@ -6,14 +6,9 @@ namespace DeckBuilderService.Models.Data
     public class SetReleases
     {
         /// <summary>
-        ///     The key value by DynamoDB.
-        /// </summary>
-        [DynamoDBHashKey]
-        public string DynamoKey { get; set; }
-
-        /// <summary>
         ///     This is the Konami Code given to us.
         /// </summary>
+        [DynamoDBHashKey]
         public string SetCode { get; set; }
 
         /// <summary>
