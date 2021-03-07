@@ -61,8 +61,19 @@ namespace DeckBuilderService.Repository
             {
                 using(DynamoDBContext context = this.dynamoContext)
                 {
-                    return await context
+                    SetReleases queriedItem =  await context
                         .LoadAsync<SetReleases>(key);
+
+                    if(queriedItem == default(SetReleases))
+                    {
+                        return new SetReleases()
+                        {
+                            SetCode = string.Empty,
+                            ReleaseDate = string.Empty
+                        };
+                    }
+
+                    return queriedItem;
                 }
             }
             catch
