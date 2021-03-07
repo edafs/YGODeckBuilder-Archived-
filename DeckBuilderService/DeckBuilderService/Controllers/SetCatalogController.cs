@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DeckBuilderService.Services;
+using DeckBuilderService.Models.Data;
 using Microsoft.AspNetCore.Mvc;
 using HttpStatusCodes = Microsoft.AspNetCore.Http.StatusCodes;
 
@@ -60,7 +61,7 @@ namespace DeckBuilderService.Controllers
                 return StatusCode(HttpStatusCodes.Status400BadRequest, "No search criteria was provided.");
             }
 
-            var queriedResult = await this._setCatalogService.SearchFromSetCatalog(key);
+            SetReleases queriedResult = await this._setCatalogService.SearchFromSetCatalog(key.ToUpperInvariant());
 
             if (queriedResult == null)
             {
