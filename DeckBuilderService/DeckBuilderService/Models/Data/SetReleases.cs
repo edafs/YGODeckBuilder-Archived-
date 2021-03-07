@@ -9,7 +9,7 @@ namespace DeckBuilderService.Models.Data
         ///     The key value by DynamoDB.
         /// </summary>
         [DynamoDBHashKey]
-        public string DynamoKey { get; private set; }
+        public string DynamoKey { get; set; }
 
         /// <summary>
         ///     This is the Konami Code given to us.

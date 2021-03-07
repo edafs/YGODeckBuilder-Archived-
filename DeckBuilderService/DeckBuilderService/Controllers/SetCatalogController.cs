@@ -28,7 +28,7 @@ namespace DeckBuilderService.Controllers
         }
 
         /// <summary>
-        ///     This returns the full set catalog. 
+        ///     This returns the full set catalog.
         /// </summary>
         /// <remarks>
         ///     HTTP GET method.
@@ -44,6 +44,30 @@ namespace DeckBuilderService.Controllers
             }
 
             return Ok(setCatalog);
+        }
+
+        /// <summary>
+        ///     Returns an item from the set catalog.
+        /// </summary>
+        /// <remarks>
+        ///     HTTP GET.
+        /// </remarks>
+        [HttpGet, Route("SearchCatalog/{key}")]
+        public async Task<IActionResult> SearchCatalog(string key)
+        {
+            if(string.IsNullOrWhiteSpace(key))
+            {
+                return StatusCode(HttpStatusCodes.Status400BadRequest, "No search criteria was provided.");
+            }
+
+            var queriedResult = await this._setCatalogService.SearchFromSetCatalog(key);
+
+            if (queriedResult == null)
+            {
+                return StatusCode(HttpStatusCodes.Status503ServiceUnavailable);
+            }
+
+            return Ok(queriedResult);
         }
 
         /// <summary>

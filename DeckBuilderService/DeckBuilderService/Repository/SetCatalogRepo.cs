@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.Model;
 using DeckBuilderService.Models.Data;
 
 namespace DeckBuilderService.Repository
@@ -44,6 +46,25 @@ namespace DeckBuilderService.Repository
                     return await context
                         .ScanAsync<SetReleases>(new List<ScanCondition>())
                         .GetRemainingAsync();
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///     Queries the set catalog for something based on the key.
+        /// </summary>
+        public async Task<SetReleases> SearchFromCatalog(string key)
+        {
+            try
+            {
+                using(DynamoDBContext context = this.dynamoContext)
+                {
+                    return await context
+                        .LoadAsync<SetReleases>(key);
                 }
             }
             catch
