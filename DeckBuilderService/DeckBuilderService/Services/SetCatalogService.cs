@@ -41,5 +41,20 @@ namespace DeckBuilderService.Services
                 return setCatalog;
             }
         }
+
+        /// <summary>
+        ///     Returns the first element when queried against the set catalog.
+        /// </summary>
+        public async Task<SetReleases> SearchFromSetCatalog(string key)
+        {
+            SetReleases queriedResult = await _setCatalogRepo.SearchFromCatalog(key);
+
+            if (queriedResult == null)
+            {
+                return null;
+            }
+
+            return queriedResult;
+        }
     }
 }

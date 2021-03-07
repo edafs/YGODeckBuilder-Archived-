@@ -51,5 +51,35 @@ namespace DeckBuilderService.Repository
                 return null;
             }
         }
+
+        /// <summary>
+        ///     Queries the set catalog for something based on the key.
+        /// </summary>
+        public async Task<SetReleases> SearchFromCatalog(string key)
+        {
+            try
+            {
+                using(DynamoDBContext context = this.dynamoContext)
+                {
+                    SetReleases queriedItem =  await context
+                        .LoadAsync<SetReleases>(key);
+
+                    if(queriedItem == default(SetReleases))
+                    {
+                        return new SetReleases()
+                        {
+                            SetCode = string.Empty,
+                            ReleaseDate = string.Empty
+                        };
+                    }
+
+                    return queriedItem;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
