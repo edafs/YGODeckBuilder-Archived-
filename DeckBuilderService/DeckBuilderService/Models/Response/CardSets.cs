@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DeckBuilderService.Models.Response
+﻿namespace DeckBuilderService.Models.Response
 {
     /// <summary>
     ///     Response models for the card sets.
@@ -13,21 +11,21 @@ namespace DeckBuilderService.Models.Response
         /// <summary>
         ///     The name of the set.
         /// </summary>
-        public string SetName { get; set; }
+        public string set_name { get; set; }
 
         /// <summary>
         ///     The set code.
         /// </summary>
-        public string SetCode { get; set; }
+        public string set_code { get; set; }
 
         /// <summary>
         ///     The number of cards in a set.
         /// </summary>
-        public int CardCount { get; set; }
+        public int num_of_cards { get; set; }
 
         /// <summary>
         ///     The release date of the TCG.
         /// </summary>
-        public DateTime TcgDate { get; set; }
+        public string tcg_date { get; set; }
     }
 }
