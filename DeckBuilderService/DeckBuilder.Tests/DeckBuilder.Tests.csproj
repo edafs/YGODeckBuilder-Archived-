@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="YgoProDeckServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeckBuilderService\DeckBuilderService.csproj" />
+  </ItemGroup>
 </Project>
