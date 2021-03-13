@@ -10,17 +10,20 @@ namespace DeckBuilder.Tests.YgoProDeckServices
 {
     public class CardSetTests
     {
+        /// <summary>
+        ///     Gets an instance of the <see cref="CardSetService"/>
+        /// </summary>
         private CardSetService Service
         {
             get { return new CardSetService(); }
         }
 
-        [SetUp]
-        public void Init()
-        {
-
-        }
-
+        /// <summary>
+        ///     Checks to see if the service returns the full Card Sets.
+        /// </summary>
+        /// <remarks>
+        ///     If this test fails, a refresh is needed.
+        /// </remarks>
         [Test]
         public void CanReturnCardSets()
         {
@@ -28,13 +31,16 @@ namespace DeckBuilder.Tests.YgoProDeckServices
             Assert.IsTrue(results.Count() == 858);
         }
 
+        /// <summary>
+        ///     Checks to see if the Card Sets are deserialized properly.
+        /// </summary>
         [Test]
         public void IsCardSetDeserializedProperly()
         {
             IEnumerable<CardSets> results = this.Service.GetCardSets().Result;
 
             CardSets cyberImpact = results
-                .Where(cardSets => cardSets.set_code == "CDIP")
+                .Where(cardSets => cardSets.SetCode == "CDIP")
                 .FirstOrDefault();
 
             if(cyberImpact == null)
@@ -44,33 +50,33 @@ namespace DeckBuilder.Tests.YgoProDeckServices
 
             CardSets expectedResult = new CardSets()
             {
-                set_name = "Cyberdark Impact",
-                set_code = "CDIP",
-                num_of_cards = 60,
-                tcg_date = "2006-11-15"
+                SetName = "Cyberdark Impact",
+                SetCode = "CDIP",
+                CardCount = 60,
+                ReleaseDate = "2006-11-15"
             };
 
             Assert.IsTrue(
-                string.Equals(cyberImpact.set_name
-                    , expectedResult.set_name
+                string.Equals(cyberImpact.SetName
+                    , expectedResult.SetName
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "Set names is not expected.");
 
             Assert.IsTrue(
                 string.Equals(
-                    cyberImpact.set_code
-                    , expectedResult.set_code
+                    cyberImpact.SetCode
+                    , expectedResult.SetCode
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "Set codes is not expected.");
 
             Assert.IsTrue(
-                cyberImpact.num_of_cards == expectedResult.num_of_cards
+                cyberImpact.CardCount == expectedResult.CardCount
                 , "Card count is not expected.");
 
             Assert.IsTrue(
                 string.Equals(
-                    cyberImpact.tcg_date
-                    , expectedResult.tcg_date
+                    cyberImpact.ReleaseDate
+                    , expectedResult.ReleaseDate
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "TcgDate is not expected.");
         }

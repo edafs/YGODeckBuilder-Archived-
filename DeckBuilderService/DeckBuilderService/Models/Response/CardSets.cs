@@ -1,4 +1,6 @@
-﻿namespace DeckBuilderService.Models.Response
+﻿using System.Text.Json.Serialization;
+
+namespace DeckBuilderService.Models.Response
 {
     /// <summary>
     ///     Response models for the card sets.
@@ -11,21 +13,25 @@
         /// <summary>
         ///     The name of the set.
         /// </summary>
-        public string set_name { get; set; }
+        [JsonPropertyName("set_name")]
+        public string SetName { get; set; }
 
         /// <summary>
         ///     The set code.
         /// </summary>
-        public string set_code { get; set; }
+        [JsonPropertyName("set_code")]
+        public string SetCode { get; set; }
 
         /// <summary>
         ///     The number of cards in a set.
         /// </summary>
-        public int num_of_cards { get; set; }
+        [JsonPropertyName("num_of_cards")]
+        public int CardCount { get; set; }
 
         /// <summary>
         ///     The release date of the TCG.
         /// </summary>
-        public string tcg_date { get; set; }
+        [JsonPropertyName("tcg_date")]
+        public string ReleaseDate { get; set; }
     }
 }

@@ -19,6 +19,10 @@ namespace DeckBuilderService.Services
             this.WebClient = new HttpClient();
         }
 
+        /// <summary>
+        ///     Returns all the cards from the card sets API
+        ///     in the form of <see cref="IEnumerable{CardSets}"/>.
+        /// </summary>
         public async Task<IEnumerable<CardSets>> GetCardSets()
         {
             string response = await this.WebClient
