@@ -3,7 +3,6 @@ using DeckBuilderService.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace DeckBuilder.Tests.YgoProDeckServices
@@ -37,17 +36,7 @@ namespace DeckBuilder.Tests.YgoProDeckServices
         [Test]
         public void IsCardSetDeserializedProperly()
         {
-            IEnumerable<CardSets> results = this.Service.GetCardSets().Result;
-
-            CardSets cyberImpact = results
-                .Where(cardSets => cardSets.SetCode == "CDIP")
-                .FirstOrDefault();
-
-            if(cyberImpact == null)
-            {
-                Assert.Fail("Failed to find CyberDark Impact");
-            }
-
+            #region Arange 
             CardSets expectedResult = new CardSets()
             {
                 SetName = "Cyberdark Impact",
@@ -56,6 +45,23 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                 ReleaseDate = "2006-11-15"
             };
 
+            #endregion
+
+            #region Act
+            IEnumerable<CardSets> results = this.Service.GetCardSets().Result;
+
+            CardSets cyberImpact = results
+                .Where(cardSets => cardSets.SetCode == "CDIP")
+                .FirstOrDefault();
+
+            #endregion
+
+            #region Assert 
+            if (cyberImpact == default(CardSets))
+            {
+                Assert.Fail("Failed to find CyberDark Impact");
+            }
+            
             Assert.IsTrue(
                 string.Equals(cyberImpact.SetName
                     , expectedResult.SetName
@@ -79,6 +85,8 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                     , expectedResult.ReleaseDate
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "TcgDate is not expected.");
+
+            #endregion
         }
     }
 }
