@@ -44,7 +44,6 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                 CardCount = 60,
                 ReleaseDate = "2006-11-15"
             };
-
             #endregion
 
             #region Act
@@ -53,7 +52,6 @@ namespace DeckBuilder.Tests.YgoProDeckServices
             CardSets cyberImpact = results
                 .Where(cardSets => cardSets.SetCode == "CDIP")
                 .FirstOrDefault();
-
             #endregion
 
             #region Assert 
@@ -85,7 +83,6 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                     , expectedResult.ReleaseDate
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "TcgDate is not expected.");
-
             #endregion
         }
     }
