@@ -2,6 +2,9 @@
 
 namespace DeckBuilderService.Models.Data
 {
+    /// <summary>
+    ///     The model for the dynamo table for the TCG sets.
+    /// </summary>
     [DynamoDBTable("YGO_SetCatalog")]
     public class SetReleases
     {

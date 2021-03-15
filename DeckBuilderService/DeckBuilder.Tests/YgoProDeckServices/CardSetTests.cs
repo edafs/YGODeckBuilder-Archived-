@@ -1,4 +1,5 @@
-﻿using DeckBuilderService.Models.Response;
+﻿using DeckBuilderService.Models.Data;
+using DeckBuilderService.Models.Response;
 using DeckBuilderService.Services;
 using NUnit.Framework;
 using System;
@@ -83,6 +84,64 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                     , expectedResult.ReleaseDate
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "TcgDate is not expected.");
+            #endregion
+        }
+
+        /// <summary>
+        ///     Tests the transforms between the data types.
+        /// </summary>
+        [Test]
+        public void IsTransformDataCorrect()
+        {
+            #region Arrange
+            List<CardSets> testSets = new List<CardSets>();
+
+            CardSets fireFist = new CardSets()
+            {
+                SetName = "Fire Fists: Special Edition",
+                SetCode = "FFSE",
+                CardCount = 1,
+                ReleaseDate = "2014-04-04"
+            };
+
+            CardSets phantomDarkness = new CardSets()
+            {
+                SetName = "Phantom Darkness",
+                SetCode = "PTDN",
+                CardCount = 100,
+                ReleaseDate = "2008-02-13"
+            };
+
+            testSets.AddRange(
+                new List<CardSets>() { fireFist, phantomDarkness }
+            );
+
+            #endregion
+
+            #region Act
+            List<SetReleases> transformedCatalog = this.Service
+                .TransformToSetRelease(testSets)
+                .ToList();
+            #endregion
+
+            #region Assert
+
+            // Assert for FireFists
+            SetReleases fireFistActual = transformedCatalog
+                .FirstOrDefault(catalog => catalog.SetCode == "FFSE");
+            Assert.IsTrue(string.Equals(fireFistActual.SetCode, "FFSE"
+                , StringComparison.InvariantCultureIgnoreCase));
+            Assert.IsTrue(string.Equals(fireFistActual.ReleaseDate, "2014-04-04"
+                , StringComparison.InvariantCultureIgnoreCase));
+
+            // Assert for Phantom Darkness
+            SetReleases phantomDarknessActual = transformedCatalog
+                .FirstOrDefault(catalog => catalog.SetCode == "PTDN");
+            Assert.IsTrue(string.Equals(phantomDarknessActual.SetCode, "PTDN"
+                , StringComparison.InvariantCultureIgnoreCase));
+            Assert.IsTrue(string.Equals(phantomDarknessActual.ReleaseDate, "2008-02-13"
+                , StringComparison.InvariantCultureIgnoreCase));
+
             #endregion
         }
     }

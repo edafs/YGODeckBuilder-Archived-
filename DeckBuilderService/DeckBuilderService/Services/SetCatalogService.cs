@@ -73,6 +73,28 @@ namespace DeckBuilderService.Services
         }
 
         /// <summary>
+        ///     Transform collection of <see cref="CardSets"/> to <see cref="SetReleases"/>.
+        /// </summary>
+        /// <param name="cardSets"></param>
+        /// <returns></returns>
+        public IEnumerable<SetReleases> TransformToSetRelease(IEnumerable<CardSets> cardSets)
+        {
+            List<SetReleases> releases = new List<SetReleases>();
+
+            foreach (CardSets set in cardSets)
+            {
+                releases.Add(new SetReleases()
+                    {
+                        SetCode = set.SetCode,
+                        ReleaseDate = set.ReleaseDate
+                    }
+                );
+            }
+
+            return releases;
+        }
+
+        /// <summary>
         ///     Returns all the cards from the card sets API
         ///     in the form of <see cref="IEnumerable{CardSets}"/>.
         /// </summary>
