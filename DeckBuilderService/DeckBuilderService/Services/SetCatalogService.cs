@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using DeckBuilderService.Models.Data;
+using DeckBuilderService.Models.Response;
 using DeckBuilderService.Repository;
 
 namespace DeckBuilderService.Services
@@ -17,12 +20,24 @@ namespace DeckBuilderService.Services
         public readonly SetCatalogRepo _setCatalogRepo;
 
         /// <summary>
+        ///     Singleton instance of <see cref="HttpClient"/>.
+        /// </summary>
+        private readonly HttpClient WebClient;
+
+        /// <summary>
+        ///     Blank constructor.
+        /// </summary>
+        public SetCatalogService() => this.WebClient = new HttpClient();
+
+        /// <summary>
         ///     Constructor for <see cref="SetCatalogService"/>.
         /// </summary>
         public SetCatalogService(SetCatalogRepo setCatalogRepo)
         {
             this._setCatalogRepo = setCatalogRepo
                 ?? throw new ArgumentNullException("The set catalog repo failed to intialized.");
+
+            this.WebClient = new HttpClient();
         }
 
         /// <summary>
@@ -55,6 +70,21 @@ namespace DeckBuilderService.Services
             }
 
             return queriedResult;
+        }
+
+        /// <summary>
+        ///     Returns all the cards from the card sets API
+        ///     in the form of <see cref="IEnumerable{CardSets}"/>.
+        /// </summary>
+        public async Task<IEnumerable<CardSets>> GetCardSets()
+        {
+            string response = await this.WebClient
+                .GetStringAsync("https://db.ygoprodeck.com/api/v7/cardsets.php");
+
+            List<CardSets> cardSets = JsonSerializer
+                .Deserialize<List<CardSets>>(response);
+
+            return cardSets;
         }
     }
 }

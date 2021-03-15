@@ -12,9 +12,9 @@ namespace DeckBuilder.Tests.YgoProDeckServices
         /// <summary>
         ///     Gets an instance of the <see cref="CardSetService"/>
         /// </summary>
-        private CardSetService Service
+        private SetCatalogService Service
         {
-            get { return new CardSetService(); }
+            get { return new SetCatalogService(); }
         }
 
         /// <summary>
