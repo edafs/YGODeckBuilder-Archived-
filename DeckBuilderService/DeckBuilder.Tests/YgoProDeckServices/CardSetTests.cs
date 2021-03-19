@@ -55,22 +55,21 @@ namespace DeckBuilder.Tests.YgoProDeckServices
                 .FirstOrDefault();
             #endregion
 
-            #region Assert 
+            #region Assert
+
             if (cyberImpact == default(CardSets))
             {
                 Assert.Fail("Failed to find CyberDark Impact");
             }
             
             Assert.IsTrue(
-                string.Equals(cyberImpact.SetName
-                    , expectedResult.SetName
+                string.Equals(cyberImpact.SetName, expectedResult.SetName
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "Set names is not expected.");
 
             Assert.IsTrue(
                 string.Equals(
-                    cyberImpact.SetCode
-                    , expectedResult.SetCode
+                    cyberImpact.SetCode, expectedResult.SetCode
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "Set codes is not expected.");
 
@@ -80,10 +79,10 @@ namespace DeckBuilder.Tests.YgoProDeckServices
 
             Assert.IsTrue(
                 string.Equals(
-                    cyberImpact.ReleaseDate
-                    , expectedResult.ReleaseDate
+                    cyberImpact.ReleaseDate, expectedResult.ReleaseDate
                     , StringComparison.InvariantCultureIgnoreCase)
                 , "TcgDate is not expected.");
+
             #endregion
         }
 
@@ -126,7 +125,7 @@ namespace DeckBuilder.Tests.YgoProDeckServices
 
             #region Assert
 
-            // Assert for FireFists
+            // Assert for Fire Fists
             SetReleases fireFistActual = transformedCatalog
                 .FirstOrDefault(catalog => catalog.SetCode == "FFSE");
             Assert.IsTrue(string.Equals(fireFistActual.SetCode, "FFSE"

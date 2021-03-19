@@ -109,7 +109,7 @@ namespace DeckBuilderService.Services
 
             // Remove Sneak Peaks, their release date & code conflicts with offical sets.
             cardSets.RemoveAll(sets => sets.SetName
-                .Contains("Sneak Peak", StringComparison.CurrentCultureIgnoreCase)
+                .Contains("Sneak Peek", StringComparison.CurrentCultureIgnoreCase)
             );
 
             return cardSets;
