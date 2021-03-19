@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -105,6 +106,11 @@ namespace DeckBuilderService.Services
 
             List<CardSets> cardSets = JsonSerializer
                 .Deserialize<List<CardSets>>(response);
+
+            // Remove Sneak Peaks, their release date & code conflicts with offical sets.
+            cardSets.RemoveAll(sets => sets.SetName
+                .Contains("Sneak Peak", StringComparison.CurrentCultureIgnoreCase)
+            );
 
             return cardSets;
         }
