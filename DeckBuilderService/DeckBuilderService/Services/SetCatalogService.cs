@@ -107,10 +107,19 @@ namespace DeckBuilderService.Services
             List<CardSets> cardSets = JsonSerializer
                 .Deserialize<List<CardSets>>(response);
 
-            // Remove Sneak Peaks, their release date & code conflicts with offical sets.
-            cardSets.RemoveAll(sets => sets.SetName
-                .Contains("Sneak Peek", StringComparison.CurrentCultureIgnoreCase)
-            );
+            // Remove duplicate sets that may conflicts with offical sets.
+            List<string> conflictingSets = new List<string>()
+            {
+                "Sneak Peek", "Special Edition", "Advance Edition",
+                "Premiere!", "Launch Event"
+            };
+
+            foreach (string conflicts in conflictingSets)
+            {
+                cardSets.RemoveAll(sets => sets.SetName
+                    .Contains(conflicts, StringComparison.CurrentCultureIgnoreCase)
+                );
+            }
 
             return cardSets;
         }
